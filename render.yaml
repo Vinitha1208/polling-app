@@ -1,8 +1,10 @@
 services:
+  # 1. Go + Gin Backend API
   - type: web
     name: pollpulse-backend
     env: go
     rootDir: backend
+    plan: free
     buildCommand: go build -o server ./cmd/server
     startCommand: ./server
     envVars:
@@ -17,4 +19,20 @@ services:
       - key: JWT_SECRET
         generateValue: true
       - key: FRONTEND_URL
+        value: "*"
+
+  # 2. React (Vite) Frontend Static Site
+  - type: web
+    name: pollpulse-frontend
+    env: static
+    rootDir: frontend
+    plan: free
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_BACKEND_URL
         sync: false
