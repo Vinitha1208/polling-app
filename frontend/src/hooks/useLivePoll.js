@@ -29,9 +29,15 @@ export const useLivePoll = (pollId) => {
     if (!pollId) return;
 
     // Determine WS protocol and host
-    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const host = window.location.host;
-    const wsUrl = `${protocol}//${host}/api/polls/${pollId}/live`;
+    let wsUrl;
+    if (import.meta.env.VITE_BACKEND_URL) {
+      const backendWs = import.meta.env.VITE_BACKEND_URL.replace(/^http/i, 'ws').replace(/\/$/, '');
+      wsUrl = `${backendWs}/api/polls/${pollId}/live`;
+    } else {
+      const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+      const host = window.location.host;
+      wsUrl = `${protocol}//${host}/api/polls/${pollId}/live`;
+    }
 
     console.log(`[WS] Connecting to ${wsUrl}...`);
     setConnectionStatus('connecting');

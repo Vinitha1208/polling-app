@@ -8,6 +8,10 @@ export const getVoterToken = () => {
   return token;
 };
 
+const API_BASE = import.meta.env.VITE_BACKEND_URL
+  ? import.meta.env.VITE_BACKEND_URL.replace(/\/$/, '')
+  : '';
+
 // Base fetch wrapper
 const request = async (endpoint, options = {}) => {
   const token = localStorage.getItem('poll_auth_token');
@@ -23,7 +27,8 @@ const request = async (endpoint, options = {}) => {
     headers['Authorization'] = `Bearer ${token}`;
   }
 
-  const response = await fetch(endpoint, {
+  const url = `${API_BASE}${endpoint}`;
+  const response = await fetch(url, {
     ...options,
     headers,
   });
