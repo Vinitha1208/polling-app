@@ -29,6 +29,17 @@ func SetupRouter(deps *RouterDependencies) *gin.Engine {
 	// Global middleware
 	r.Use(middleware.CORSMiddleware())
 
+	// Root confirmation endpoint
+	r.GET("/", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"service":      "PollPulse Live Polling Backend API",
+			"status":       "running",
+			"health_check": "/api/health",
+			"frontend_url": "http://localhost:5173",
+			"message":      "Backend is active and connected to Redis and MongoDB!",
+		})
+	})
+
 	// Health check with active Redis and MongoDB ping
 	r.GET("/api/health", func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
