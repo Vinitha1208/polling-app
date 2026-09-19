@@ -49,6 +49,8 @@ func main() {
 		VoteCtrl: voteCtrl,
 		WSCtrl:   wsCtrl,
 		AuthSvc:  authService,
+		DB:       db,
+		Redis:    rdb,
 	})
 
 	// 8. Start HTTP Server
