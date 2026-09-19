@@ -7,8 +7,8 @@
 
 ## 🚀 Live Demo & Repository Links
 
-- **Frontend Live URL**: [https://people-acrobat-amount-basis.trycloudflare.com](https://people-acrobat-amount-basis.trycloudflare.com)
-- **Backend API URL**: [https://people-acrobat-amount-basis.trycloudflare.com/api](https://people-acrobat-amount-basis.trycloudflare.com/api)
+- **Frontend Live URL**: [https://compare-alumni-journalism-air.trycloudflare.com](https://compare-alumni-journalism-air.trycloudflare.com)
+- **Backend API URL**: [https://compare-alumni-journalism-air.trycloudflare.com/api](https://compare-alumni-journalism-air.trycloudflare.com/api)
 - **GitHub Repository**: [https://github.com/your-username/live-polling](https://github.com/your-username/live-polling)
 - **Demo Video (3–5 min)**: [Unlisted YouTube / Google Drive Link]
 
