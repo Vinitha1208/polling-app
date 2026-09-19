@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Copy, Check, ExternalLink, BarChart2, Lock, Trash2, Users } from 'lucide-react';
+import { Copy, Check, ExternalLink, BarChart2, Lock, Trash2, Users, Radio, Sparkles } from 'lucide-react';
 import { showToast } from './Toast';
 import { api } from '../services/api';
 
@@ -50,17 +50,26 @@ export const PollCard = ({ poll, onStatusChange, onDelete }) => {
   const isClosed = poll.status === 'closed' || poll.is_expired;
 
   return (
-    <div className="glass-card" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-      {/* Header with status and code */}
+    <div
+      className="glass-card"
+      style={{
+        padding: '1.75rem',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1.25rem',
+        background: 'rgba(13, 19, 38, 0.75)',
+      }}
+    >
+      {/* Top Meta Bar */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
           {isClosed ? (
             <span className="pill-badge pill-closed">
               <Lock size={12} /> Closed
             </span>
           ) : (
             <span className="pill-badge pill-active">
-              <span className="pulse-dot" /> Active
+              <span className="pulse-dot" /> Live Active
             </span>
           )}
 
@@ -68,22 +77,35 @@ export const PollCard = ({ poll, onStatusChange, onDelete }) => {
             style={{
               fontFamily: 'var(--font-display)',
               fontWeight: 700,
-              fontSize: '0.85rem',
+              fontSize: '0.82rem',
               letterSpacing: '0.08em',
-              background: 'rgba(255, 255, 255, 0.06)',
-              padding: '0.2rem 0.6rem',
-              borderRadius: '6px',
-              border: '1px solid var(--border-subtle)',
-              color: 'var(--text-muted)',
+              background: 'rgba(99, 102, 241, 0.12)',
+              color: '#c7d2fe',
+              padding: '0.22rem 0.65rem',
+              borderRadius: '8px',
+              border: '1px solid rgba(99, 102, 241, 0.25)',
             }}
           >
             #{poll.share_code}
           </span>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-muted)', fontSize: '0.88rem' }}>
-          <Users size={16} color="var(--primary)" />
-          <strong style={{ color: 'var(--text-main)' }}>{poll.total_votes}</strong> {poll.total_votes === 1 ? 'vote' : 'votes'}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.45rem',
+            color: 'var(--text-muted)',
+            fontSize: '0.9rem',
+            background: 'rgba(255, 255, 255, 0.04)',
+            padding: '0.25rem 0.7rem',
+            borderRadius: 'var(--radius-full)',
+            border: '1px solid var(--border-subtle)',
+          }}
+        >
+          <Users size={15} color="var(--primary)" />
+          <strong style={{ color: 'var(--text-main)', fontSize: '0.95rem' }}>{poll.total_votes}</strong>{' '}
+          {poll.total_votes === 1 ? 'vote' : 'votes'}
         </div>
       </div>
 
@@ -93,75 +115,98 @@ export const PollCard = ({ poll, onStatusChange, onDelete }) => {
           fontSize: '1.25rem',
           fontWeight: 700,
           fontFamily: 'var(--font-display)',
-          lineHeight: 1.4,
+          lineHeight: 1.45,
           color: 'var(--text-main)',
         }}
       >
         {poll.question}
       </h3>
 
-      {/* Mini preview of options */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+      {/* Options preview with mini visual bars */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.55rem' }}>
         {poll.options && poll.options.slice(0, 3).map((opt) => (
-          <div
-            key={opt.id}
-            style={{
-              fontSize: '0.85rem',
-              color: 'var(--text-muted)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-            }}
-          >
-            <span>• {opt.text}</span>
-            <span style={{ fontWeight: 600 }}>{opt.votes} ({Math.round(opt.percentage)}%)</span>
+          <div key={opt.id} style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
+            <div
+              style={{
+                fontSize: '0.85rem',
+                color: 'var(--text-muted)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}
+            >
+              <span style={{ color: 'var(--text-main)' }}>{opt.text}</span>
+              <span style={{ fontWeight: 600, color: 'var(--text-muted)' }}>
+                {opt.votes} ({Math.round(opt.percentage || 0)}%)
+              </span>
+            </div>
+            <div
+              style={{
+                width: '100%',
+                height: '4px',
+                background: 'rgba(255, 255, 255, 0.06)',
+                borderRadius: '999px',
+                overflow: 'hidden',
+              }}
+            >
+              <div
+                style={{
+                  width: `${opt.percentage || 0}%`,
+                  height: '100%',
+                  background: 'linear-gradient(90deg, #6366f1, #a855f7)',
+                  borderRadius: '999px',
+                  transition: 'width 0.4s ease',
+                }}
+              />
+            </div>
           </div>
         ))}
         {poll.options && poll.options.length > 3 && (
-          <span style={{ fontSize: '0.8rem', color: 'var(--text-dim)' }}>
-            +{poll.options.length - 3} more options
+          <span style={{ fontSize: '0.8rem', color: 'var(--text-dim)', marginTop: '0.2rem' }}>
+            +{poll.options.length - 3} additional voting choices
           </span>
         )}
       </div>
 
-      {/* Card Actions */}
+      {/* Card Action Controls */}
       <div
         style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          paddingTop: '1rem',
+          paddingTop: '1.2rem',
           borderTop: '1px solid var(--border-subtle)',
           flexWrap: 'wrap',
           gap: '0.75rem',
+          marginTop: 'auto',
         }}
       >
-        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: '0.55rem', flexWrap: 'wrap' }}>
           <button
             onClick={copyShareLink}
             className="btn btn-secondary btn-sm"
-            title="Copy share link for audience"
+            title="Copy audience share link"
           >
-            {copied ? <Check size={15} color="#34d399" /> : <Copy size={15} />}
-            {copied ? 'Copied!' : 'Copy Link'}
+            {copied ? <Check size={14} color="#34d399" /> : <Copy size={14} />}
+            {copied ? 'Copied' : 'Share Link'}
           </button>
 
           <Link to={`/poll/${poll.poll_id}/results`} className="btn btn-primary btn-sm">
-            <BarChart2 size={15} />
+            <BarChart2 size={14} />
             Live Results
           </Link>
         </div>
 
-        <div style={{ display: 'flex', gap: '0.5rem' }}>
+        <div style={{ display: 'flex', gap: '0.45rem' }}>
           {!isClosed && (
             <button
               onClick={handleClose}
               disabled={closing}
               className="btn btn-secondary btn-sm"
-              title="Close Poll"
-              style={{ color: 'var(--accent-amber)' }}
+              title="Close Poll to new votes"
+              style={{ color: 'var(--accent-amber)', padding: '0.45rem 0.75rem' }}
             >
-              <Lock size={15} />
+              <Lock size={14} />
               Close
             </button>
           )}
@@ -169,10 +214,10 @@ export const PollCard = ({ poll, onStatusChange, onDelete }) => {
           <button
             onClick={handleDelete}
             className="btn btn-danger btn-sm"
-            title="Delete Poll"
-            style={{ padding: '0.5rem' }}
+            title="Delete this poll"
+            style={{ padding: '0.45rem 0.65rem' }}
           >
-            <Trash2 size={15} />
+            <Trash2 size={14} />
           </button>
         </div>
       </div>

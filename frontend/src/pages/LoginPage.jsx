@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { LogIn, Mail, Lock, AlertCircle, Sparkles } from 'lucide-react';
+import { LogIn, Mail, Lock, AlertCircle, Sparkles, ArrowRight } from 'lucide-react';
 
 export const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -44,39 +44,67 @@ export const LoginPage = () => {
         alignItems: 'center',
         justifyContent: 'center',
         minHeight: '75vh',
+        position: 'relative',
       }}
     >
+      {/* Background ambient glow element */}
+      <div
+        style={{
+          position: 'absolute',
+          width: '320px',
+          height: '320px',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, transparent 70%)',
+          filter: 'blur(50px)',
+          zIndex: 0,
+          pointerEvents: 'none',
+        }}
+      />
+
       <div
         className="glass-card"
         style={{
-          maxWidth: '440px',
+          maxWidth: '460px',
           width: '100%',
-          padding: '2.5rem 2rem',
+          padding: '2.75rem 2.25rem',
           display: 'flex',
           flexDirection: 'column',
-          gap: '1.5rem',
+          gap: '1.75rem',
+          position: 'relative',
+          zIndex: 1,
+          background: 'rgba(13, 19, 38, 0.82)',
         }}
       >
         <div style={{ textAlign: 'center' }}>
           <div
             style={{
-              width: '48px',
-              height: '48px',
-              borderRadius: '14px',
-              background: 'var(--gradient-primary)',
+              width: '54px',
+              height: '54px',
+              borderRadius: '16px',
+              background: 'linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%)',
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
               marginBottom: '1rem',
-              boxShadow: '0 4px 15px var(--primary-glow)',
+              boxShadow: '0 8px 25px rgba(99, 102, 241, 0.45)',
             }}
           >
-            <LogIn size={24} color="#fff" />
+            <LogIn size={26} color="#fff" />
           </div>
-          <h2 style={{ fontSize: '1.75rem', fontWeight: 800, fontFamily: 'var(--font-display)' }}>
-            Welcome Back
+
+          <h2
+            style={{
+              fontSize: '1.95rem',
+              fontWeight: 800,
+              fontFamily: 'var(--font-display)',
+              letterSpacing: '-0.02em',
+            }}
+          >
+            <span className="gradient-heading">Welcome</span>{' '}
+            <span className="gradient-accent-heading">Back</span>
           </h2>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginTop: '0.25rem' }}>
+
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.94rem', marginTop: '0.35rem' }}>
             Sign in to manage and launch real-time live polls
           </p>
         </div>
@@ -84,15 +112,15 @@ export const LoginPage = () => {
         {error && (
           <div
             style={{
-              background: 'rgba(244, 63, 94, 0.15)',
-              border: '1px solid rgba(244, 63, 94, 0.3)',
+              background: 'rgba(244, 63, 94, 0.14)',
+              border: '1px solid rgba(244, 63, 94, 0.35)',
               borderRadius: 'var(--radius-sm)',
-              padding: '0.75rem 1rem',
-              color: '#fca5a5',
-              fontSize: '0.88rem',
+              padding: '0.85rem 1rem',
+              color: '#fda4af',
+              fontSize: '0.9rem',
               display: 'flex',
               alignItems: 'center',
-              gap: '0.5rem',
+              gap: '0.6rem',
             }}
           >
             <AlertCircle size={18} />
@@ -100,7 +128,7 @@ export const LoginPage = () => {
           </div>
         )}
 
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.15rem' }}>
           <div className="form-group" style={{ margin: 0 }}>
             <label className="form-label">Email Address</label>
             <div style={{ position: 'relative' }}>
@@ -111,7 +139,7 @@ export const LoginPage = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                style={{ paddingLeft: '2.75rem' }}
+                style={{ paddingLeft: '2.85rem' }}
               />
               <Mail
                 size={18}
@@ -131,7 +159,7 @@ export const LoginPage = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                style={{ paddingLeft: '2.75rem' }}
+                style={{ paddingLeft: '2.85rem' }}
               />
               <Lock
                 size={18}
@@ -145,34 +173,39 @@ export const LoginPage = () => {
             type="submit"
             className="btn btn-primary"
             disabled={loading}
-            style={{ width: '100%', marginTop: '0.5rem' }}
+            style={{ width: '100%', marginTop: '0.5rem', padding: '0.95rem', fontSize: '1.02rem' }}
           >
             {loading ? 'Authenticating...' : 'Sign In'}
+            <ArrowRight size={18} />
           </button>
         </form>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', textAlign: 'center' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', textAlign: 'center' }}>
           <button
             type="button"
             onClick={handleDemoFill}
             style={{
-              background: 'transparent',
-              border: 'none',
-              color: 'var(--primary)',
-              fontSize: '0.85rem',
+              background: 'rgba(99, 102, 241, 0.1)',
+              border: '1px solid rgba(99, 102, 241, 0.25)',
+              borderRadius: 'var(--radius-sm)',
+              padding: '0.6rem 1rem',
+              color: '#c7d2fe',
+              fontSize: '0.88rem',
+              fontWeight: 600,
               cursor: 'pointer',
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '4px',
+              gap: '6px',
+              transition: 'all 0.2s ease',
             }}
           >
-            <Sparkles size={14} /> Auto-fill Demo Credentials
+            <Sparkles size={15} color="#818cf8" /> Click to Auto-fill Demo Credentials
           </button>
 
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem' }}>
             Don't have an account?{' '}
-            <Link to="/signup" style={{ color: 'var(--primary)', fontWeight: 600 }}>
+            <Link to="/signup" style={{ color: '#818cf8', fontWeight: 700 }}>
               Sign Up
             </Link>
           </p>

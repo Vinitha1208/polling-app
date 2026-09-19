@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { UserPlus, User, Mail, Lock, AlertCircle } from 'lucide-react';
+import { UserPlus, User, Mail, Lock, AlertCircle, ArrowRight, ShieldCheck } from 'lucide-react';
 
 export const SignupPage = () => {
   const [name, setName] = useState('');
@@ -40,55 +40,82 @@ export const SignupPage = () => {
         alignItems: 'center',
         justifyContent: 'center',
         minHeight: '75vh',
+        position: 'relative',
       }}
     >
       <div
+        style={{
+          position: 'absolute',
+          width: '320px',
+          height: '320px',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(168, 85, 247, 0.22) 0%, transparent 70%)',
+          filter: 'blur(50px)',
+          zIndex: 0,
+          pointerEvents: 'none',
+        }}
+      />
+
+      <div
         className="glass-card"
         style={{
-          maxWidth: '440px',
+          maxWidth: '460px',
           width: '100%',
-          padding: '2.5rem 2rem',
+          padding: '2.75rem 2.25rem',
           display: 'flex',
           flexDirection: 'column',
-          gap: '1.5rem',
+          gap: '1.75rem',
+          position: 'relative',
+          zIndex: 1,
+          background: 'rgba(13, 19, 38, 0.82)',
         }}
       >
         <div style={{ textAlign: 'center' }}>
           <div
             style={{
-              width: '48px',
-              height: '48px',
-              borderRadius: '14px',
-              background: 'var(--gradient-primary)',
+              width: '54px',
+              height: '54px',
+              borderRadius: '16px',
+              background: 'linear-gradient(135deg, #10b981 0%, #06b6d4 50%, #6366f1 100%)',
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
               marginBottom: '1rem',
-              boxShadow: '0 4px 15px var(--primary-glow)',
+              boxShadow: '0 8px 25px rgba(16, 185, 129, 0.4)',
             }}
           >
-            <UserPlus size={24} color="#fff" />
+            <UserPlus size={26} color="#fff" />
           </div>
-          <h2 style={{ fontSize: '1.75rem', fontWeight: 800, fontFamily: 'var(--font-display)' }}>
-            Create Account
+
+          <h2
+            style={{
+              fontSize: '1.95rem',
+              fontWeight: 800,
+              fontFamily: 'var(--font-display)',
+              letterSpacing: '-0.02em',
+            }}
+          >
+            <span className="gradient-heading">Create</span>{' '}
+            <span className="gradient-accent-heading">Account</span>
           </h2>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginTop: '0.25rem' }}>
-            Start hosting live interactive polls for free
+
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.94rem', marginTop: '0.35rem' }}>
+            Start hosting live interactive polls with zero latency
           </p>
         </div>
 
         {error && (
           <div
             style={{
-              background: 'rgba(244, 63, 94, 0.15)',
-              border: '1px solid rgba(244, 63, 94, 0.3)',
+              background: 'rgba(244, 63, 94, 0.14)',
+              border: '1px solid rgba(244, 63, 94, 0.35)',
               borderRadius: 'var(--radius-sm)',
-              padding: '0.75rem 1rem',
-              color: '#fca5a5',
-              fontSize: '0.88rem',
+              padding: '0.85rem 1rem',
+              color: '#fda4af',
+              fontSize: '0.9rem',
               display: 'flex',
               alignItems: 'center',
-              gap: '0.5rem',
+              gap: '0.6rem',
             }}
           >
             <AlertCircle size={18} />
@@ -96,7 +123,7 @@ export const SignupPage = () => {
           </div>
         )}
 
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.15rem' }}>
           <div className="form-group" style={{ margin: 0 }}>
             <label className="form-label">Full Name</label>
             <div style={{ position: 'relative' }}>
@@ -107,7 +134,7 @@ export const SignupPage = () => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                style={{ paddingLeft: '2.75rem' }}
+                style={{ paddingLeft: '2.85rem' }}
               />
               <User
                 size={18}
@@ -127,7 +154,7 @@ export const SignupPage = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                style={{ paddingLeft: '2.75rem' }}
+                style={{ paddingLeft: '2.85rem' }}
               />
               <Mail
                 size={18}
@@ -148,7 +175,7 @@ export const SignupPage = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 minLength={6}
-                style={{ paddingLeft: '2.75rem' }}
+                style={{ paddingLeft: '2.85rem' }}
               />
               <Lock
                 size={18}
@@ -162,16 +189,17 @@ export const SignupPage = () => {
             type="submit"
             className="btn btn-primary"
             disabled={loading}
-            style={{ width: '100%', marginTop: '0.5rem' }}
+            style={{ width: '100%', marginTop: '0.5rem', padding: '0.95rem', fontSize: '1.02rem' }}
           >
-            {loading ? 'Creating Account...' : 'Sign Up'}
+            {loading ? 'Creating Account...' : 'Get Started'}
+            <ArrowRight size={18} />
           </button>
         </form>
 
-        <p style={{ textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-          Already have an account?{' '}
-          <Link to="/login" style={{ color: 'var(--primary)', fontWeight: 600 }}>
-            Log In
+        <p style={{ textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.92rem' }}>
+          Already registered?{' '}
+          <Link to="/login" style={{ color: '#818cf8', fontWeight: 700 }}>
+            Sign In
           </Link>
         </p>
       </div>

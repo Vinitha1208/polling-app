@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { api } from '../services/api';
 import { PollCard } from '../components/PollCard';
-import { PlusCircle, RefreshCw, BarChart3, Radio, CheckCircle, Vote } from 'lucide-react';
+import { PlusCircle, RefreshCw, BarChart3, Radio, Vote, Sparkles, Zap, Layers } from 'lucide-react';
 import { showToast } from '../components/Toast';
 
 export const DashboardPage = () => {
@@ -36,7 +36,6 @@ export const DashboardPage = () => {
     setPolls((prev) => prev.filter((p) => p.poll_id !== deletedId));
   };
 
-  // Stats
   const totalPolls = polls.length;
   const activePolls = polls.filter((p) => p.status === 'active' && !p.is_expired).length;
   const totalVotesCast = polls.reduce((acc, p) => acc + (p.total_votes || 0), 0);
@@ -50,45 +49,62 @@ export const DashboardPage = () => {
           alignItems: 'center',
           justifyContent: 'center',
           minHeight: '60vh',
-          gap: '1rem',
+          gap: '1.25rem',
           color: 'var(--text-muted)',
         }}
       >
-        <div className="pulse-dot" style={{ color: 'var(--primary)', width: '12px', height: '12px' }} />
-        <span>Loading your polls...</span>
+        <div className="pulse-dot" style={{ color: 'var(--primary)', width: '16px', height: '16px' }} />
+        <span style={{ fontSize: '1.05rem', fontWeight: 600 }}>Loading your live polls...</span>
       </div>
     );
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-      {/* Header & Stats Banner */}
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+      {/* Hero Header Section */}
       <div
         style={{
           display: 'flex',
-          alignItems: 'center',
+          alignItems: 'flex-start',
           justifyContent: 'space-between',
           flexWrap: 'wrap',
-          gap: '1rem',
+          gap: '1.5rem',
         }}
       >
         <div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.4rem' }}>
+            <span
+              className="pill-badge"
+              style={{
+                background: 'rgba(99, 102, 241, 0.15)',
+                color: '#a5b4fc',
+                border: '1px solid rgba(99, 102, 241, 0.3)',
+                padding: '0.2rem 0.65rem',
+              }}
+            >
+              <Zap size={12} /> Real-Time Engine Active
+            </span>
+          </div>
+
           <h1
             style={{
-              fontSize: '2.25rem',
+              fontSize: '2.6rem',
               fontWeight: 800,
               fontFamily: 'var(--font-display)',
-              letterSpacing: '-0.02em',
+              letterSpacing: '-0.03em',
+              lineHeight: 1.2,
             }}
           >
-            Poll Dashboard
+            <span className="gradient-heading">Live Poll</span>{' '}
+            <span className="gradient-accent-heading">Dashboard</span>
           </h1>
-          <p style={{ color: 'var(--text-muted)', marginTop: '0.25rem' }}>
-            Manage active live polls, share with your audience, and monitor real-time votes.
+
+          <p style={{ color: 'var(--text-muted)', marginTop: '0.4rem', fontSize: '1.02rem', maxWidth: '620px' }}>
+            Launch polls, distribute share links, and watch audience votes stream in real-time powered by Redis Pub/Sub.
           </p>
         </div>
 
-        <div style={{ display: 'flex', gap: '0.75rem' }}>
+        <div style={{ display: 'flex', gap: '0.85rem', alignSelf: 'center' }}>
           <button
             onClick={handleRefresh}
             disabled={refreshing}
@@ -98,117 +114,144 @@ export const DashboardPage = () => {
             <RefreshCw size={16} className={refreshing ? 'spin-icon' : ''} />
             Refresh
           </button>
-          <Link to="/create-poll" className="btn btn-primary">
+
+          <Link
+            to="/create-poll"
+            className="btn btn-primary"
+            style={{
+              padding: '0.85rem 1.75rem',
+              boxShadow: '0 4px 25px var(--primary-glow)',
+            }}
+          >
             <PlusCircle size={18} />
             Create Poll
           </Link>
         </div>
       </div>
 
-      {/* Overview Metric Cards */}
+      {/* Metrics Row with Glowing Icon Discs */}
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-          gap: '1.25rem',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+          gap: '1.5rem',
         }}
       >
-        <div className="glass-card" style={{ padding: '1.25rem 1.5rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 500 }}>
+        {/* Total Created */}
+        <div className="glass-card stat-metric-card">
+          <div
+            className="stat-icon-wrapper"
+            style={{
+              background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(168, 85, 247, 0.25) 100%)',
+              border: '1px solid rgba(99, 102, 241, 0.4)',
+              color: '#818cf8',
+              boxShadow: '0 0 20px rgba(99, 102, 241, 0.25)',
+            }}
+          >
+            <Layers size={24} />
+          </div>
+          <div>
+            <span style={{ color: 'var(--text-muted)', fontSize: '0.88rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
               Total Created
             </span>
-            <BarChart3 size={20} color="var(--primary)" />
+            <p style={{ fontSize: '2.2rem', fontWeight: 800, fontFamily: 'var(--font-display)', lineHeight: 1.15, marginTop: '0.2rem' }}>
+              {totalPolls}
+            </p>
           </div>
-          <p
-            style={{
-              fontSize: '2rem',
-              fontWeight: 800,
-              fontFamily: 'var(--font-display)',
-              marginTop: '0.5rem',
-            }}
-          >
-            {totalPolls}
-          </p>
         </div>
 
-        <div className="glass-card" style={{ padding: '1.25rem 1.5rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 500 }}>
+        {/* Active Now */}
+        <div className="glass-card stat-metric-card">
+          <div
+            className="stat-icon-wrapper"
+            style={{
+              background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(6, 182, 212, 0.25) 100%)',
+              border: '1px solid rgba(16, 185, 129, 0.45)',
+              color: '#34d399',
+              boxShadow: '0 0 20px rgba(16, 185, 129, 0.25)',
+            }}
+          >
+            <Radio size={24} />
+          </div>
+          <div>
+            <span style={{ color: 'var(--text-muted)', fontSize: '0.88rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
               Active Polls
             </span>
-            <Radio size={20} color="#34d399" />
+            <p style={{ fontSize: '2.2rem', fontWeight: 800, fontFamily: 'var(--font-display)', lineHeight: 1.15, marginTop: '0.2rem', color: '#34d399' }}>
+              {activePolls}
+            </p>
           </div>
-          <p
-            style={{
-              fontSize: '2rem',
-              fontWeight: 800,
-              fontFamily: 'var(--font-display)',
-              marginTop: '0.5rem',
-              color: '#34d399',
-            }}
-          >
-            {activePolls}
-          </p>
         </div>
 
-        <div className="glass-card" style={{ padding: '1.25rem 1.5rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 500 }}>
-              Total Votes Received
-            </span>
-            <Vote size={20} color="#60a5fa" />
-          </div>
-          <p
+        {/* Total Votes */}
+        <div className="glass-card stat-metric-card">
+          <div
+            className="stat-icon-wrapper"
             style={{
-              fontSize: '2rem',
-              fontWeight: 800,
-              fontFamily: 'var(--font-display)',
-              marginTop: '0.5rem',
-              color: '#60a5fa',
+              background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.2) 0%, rgba(59, 130, 246, 0.25) 100%)',
+              border: '1px solid rgba(6, 182, 212, 0.45)',
+              color: '#38bdf8',
+              boxShadow: '0 0 20px rgba(6, 182, 212, 0.25)',
             }}
           >
-            {totalVotesCast}
-          </p>
+            <Vote size={24} />
+          </div>
+          <div>
+            <span style={{ color: 'var(--text-muted)', fontSize: '0.88rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              Total Votes Received
+            </span>
+            <p style={{ fontSize: '2.2rem', fontWeight: 800, fontFamily: 'var(--font-display)', lineHeight: 1.15, marginTop: '0.2rem', color: '#38bdf8' }}>
+              {totalVotesCast}
+            </p>
+          </div>
         </div>
       </div>
 
-      {/* Polls Listing */}
+      {/* Polls Listing Grid */}
       {polls.length === 0 ? (
         <div
           className="glass-card"
           style={{
             textAlign: 'center',
-            padding: '4rem 2rem',
+            padding: '4.5rem 2rem',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: '1.25rem',
+            gap: '1.5rem',
+            background: 'rgba(13, 19, 38, 0.6)',
           }}
         >
           <div
             style={{
-              width: '64px',
-              height: '64px',
-              borderRadius: '20px',
-              background: 'rgba(99, 102, 241, 0.1)',
+              width: '72px',
+              height: '72px',
+              borderRadius: '24px',
+              background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.25))',
+              border: '1px solid rgba(99, 102, 241, 0.35)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: 'var(--primary)',
+              color: '#818cf8',
+              boxShadow: '0 0 30px rgba(99, 102, 241, 0.2)',
             }}
           >
-            <BarChart3 size={32} />
+            <BarChart3 size={36} />
           </div>
+
           <div>
-            <h3 style={{ fontSize: '1.35rem', fontWeight: 700, fontFamily: 'var(--font-display)' }}>
+            <h3 style={{ fontSize: '1.5rem', fontWeight: 800, fontFamily: 'var(--font-display)' }}>
               No Polls Created Yet
             </h3>
-            <p style={{ color: 'var(--text-muted)', maxWidth: '400px', margin: '0.5rem auto 0' }}>
-              Create your first live poll in seconds and share the generated link with your audience.
+            <p style={{ color: 'var(--text-muted)', maxWidth: '440px', margin: '0.5rem auto 0', fontSize: '0.98rem' }}>
+              Launch your first live poll in seconds. Share the link with your audience and watch live updates with zero page refreshes.
             </p>
           </div>
-          <Link to="/create-poll" className="btn btn-primary" style={{ marginTop: '0.5rem' }}>
+
+          <Link
+            to="/create-poll"
+            className="btn btn-primary"
+            style={{ marginTop: '0.5rem', padding: '0.85rem 1.85rem' }}
+          >
             <PlusCircle size={18} />
             Create Your First Poll
           </Link>
@@ -217,8 +260,8 @@ export const DashboardPage = () => {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))',
-            gap: '1.5rem',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(360px, 1fr))',
+            gap: '1.6rem',
           }}
         >
           {polls.map((poll) => (

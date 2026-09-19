@@ -16,6 +16,7 @@ import {
   ArrowLeft,
   Users,
   Sparkles,
+  Zap,
 } from 'lucide-react';
 import { showToast } from '../components/Toast';
 
@@ -59,25 +60,25 @@ export const ResultsPage = () => {
           alignItems: 'center',
           justifyContent: 'center',
           minHeight: '60vh',
-          gap: '1rem',
+          gap: '1.25rem',
           color: 'var(--text-muted)',
         }}
       >
-        <div className="pulse-dot" style={{ color: 'var(--primary)', width: '14px', height: '14px' }} />
-        <span style={{ fontSize: '1.05rem', fontWeight: 500 }}>Connecting to live poll stream...</span>
+        <div className="pulse-dot" style={{ color: 'var(--primary)', width: '16px', height: '16px' }} />
+        <span style={{ fontSize: '1.1rem', fontWeight: 600 }}>Connecting to live WebSocket stream...</span>
       </div>
     );
   }
 
   if (error || !pollData) {
     return (
-      <div style={{ maxWidth: '500px', margin: '4rem auto', textAlign: 'center' }}>
-        <div className="glass-card" style={{ padding: '3rem 2rem' }}>
-          <h2 style={{ fontSize: '1.5rem', fontWeight: 800, fontFamily: 'var(--font-display)' }}>
+      <div style={{ maxWidth: '520px', margin: '4rem auto', textAlign: 'center' }}>
+        <div className="glass-card" style={{ padding: '3.5rem 2rem' }}>
+          <h2 style={{ fontSize: '1.65rem', fontWeight: 800, fontFamily: 'var(--font-display)' }}>
             Unable to Load Results
           </h2>
-          <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem' }}>
-            {error || 'Poll not found'}
+          <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem', fontSize: '0.98rem' }}>
+            {error || 'Poll not found.'}
           </p>
           <Link to="/dashboard" className="btn btn-primary" style={{ marginTop: '1.5rem' }}>
             Back to Dashboard
@@ -90,8 +91,8 @@ export const ResultsPage = () => {
   const isClosed = pollData.status === 'closed' || pollData.is_expired;
 
   return (
-    <div style={{ maxWidth: '820px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-      {/* Top Navigation & Status Bar */}
+    <div style={{ maxWidth: '860px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+      {/* Top Bar with Navigation & Connection Status */}
       <div
         style={{
           display: 'flex',
@@ -106,25 +107,30 @@ export const ResultsPage = () => {
           style={{
             display: 'inline-flex',
             alignItems: 'center',
-            gap: '0.5rem',
+            gap: '0.55rem',
             color: 'var(--text-muted)',
-            fontSize: '0.9rem',
-            fontWeight: 500,
+            fontSize: '0.92rem',
+            fontWeight: 600,
+            background: 'rgba(255, 255, 255, 0.04)',
+            padding: '0.45rem 0.95rem',
+            borderRadius: 'var(--radius-sm)',
+            border: '1px solid var(--border-subtle)',
           }}
         >
-          <ArrowLeft size={16} /> Back to Dashboard
+          <ArrowLeft size={16} /> Dashboard
         </Link>
 
-        {/* Live WebSocket Connection Pill */}
+        {/* Live WebSocket Status Indicator */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
           {connectionStatus === 'connected' ? (
             <span
               className="pill-badge"
               style={{
-                background: 'rgba(16, 185, 129, 0.15)',
+                background: 'rgba(16, 185, 129, 0.16)',
                 color: '#34d399',
-                border: '1px solid rgba(16, 185, 129, 0.3)',
-                padding: '0.35rem 0.85rem',
+                border: '1px solid rgba(16, 185, 129, 0.4)',
+                padding: '0.35rem 0.95rem',
+                boxShadow: '0 0 20px rgba(16, 185, 129, 0.25)',
               }}
             >
               <span className="pulse-dot" /> LIVE SYNC ACTIVE
@@ -133,10 +139,10 @@ export const ResultsPage = () => {
             <span
               className="pill-badge"
               style={{
-                background: 'rgba(245, 158, 11, 0.15)',
+                background: 'rgba(245, 158, 11, 0.16)',
                 color: '#fbbf24',
-                border: '1px solid rgba(245, 158, 11, 0.3)',
-                padding: '0.35rem 0.85rem',
+                border: '1px solid rgba(245, 158, 11, 0.4)',
+                padding: '0.35rem 0.95rem',
               }}
             >
               <Wifi size={14} className="spin-icon" /> RECONNECTING...
@@ -145,10 +151,10 @@ export const ResultsPage = () => {
             <span
               className="pill-badge"
               style={{
-                background: 'rgba(244, 63, 94, 0.15)',
+                background: 'rgba(244, 63, 94, 0.16)',
                 color: '#f87171',
-                border: '1px solid rgba(244, 63, 94, 0.3)',
-                padding: '0.35rem 0.85rem',
+                border: '1px solid rgba(244, 63, 94, 0.4)',
+                padding: '0.35rem 0.95rem',
               }}
             >
               <WifiOff size={14} /> OFFLINE
@@ -161,111 +167,124 @@ export const ResultsPage = () => {
             </span>
           ) : (
             <span className="pill-badge pill-active">
-              Active
+              Open
             </span>
           )}
         </div>
       </div>
 
-      {/* Main Results Card */}
-      <div className="glass-card" style={{ padding: '2.5rem 2rem', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-        {/* Title Header */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+      {/* Main Results Board Card */}
+      <div
+        className="glass-card"
+        style={{
+          padding: '2.75rem 2.25rem',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '2.25rem',
+          background: 'rgba(13, 19, 38, 0.82)',
+        }}
+      >
+        {/* Header Question and Metrics */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
             <span
               style={{
                 fontFamily: 'var(--font-display)',
-                fontWeight: 700,
+                fontWeight: 800,
                 fontSize: '0.85rem',
                 letterSpacing: '0.08em',
-                background: 'rgba(99, 102, 241, 0.15)',
-                color: 'var(--primary)',
-                padding: '0.2rem 0.6rem',
-                borderRadius: '6px',
-                border: '1px solid rgba(99, 102, 241, 0.3)',
+                background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.2))',
+                color: '#c7d2fe',
+                padding: '0.25rem 0.75rem',
+                borderRadius: '8px',
+                border: '1px solid rgba(99, 102, 241, 0.35)',
               }}
             >
-              CODE: #{pollData.share_code}
+              SHARE CODE: #{pollData.share_code}
             </span>
+
             {pollData.expires_at && (
-              <span style={{ fontSize: '0.82rem', color: 'var(--text-dim)' }}>
-                Closes: {new Date(pollData.expires_at).toLocaleString()}
+              <span style={{ fontSize: '0.84rem', color: 'var(--text-dim)' }}>
+                Expires: {new Date(pollData.expires_at).toLocaleString()}
               </span>
             )}
           </div>
 
           <h1
             style={{
-              fontSize: '2.15rem',
+              fontSize: '2.35rem',
               fontWeight: 800,
               fontFamily: 'var(--font-display)',
-              lineHeight: 1.3,
+              lineHeight: 1.28,
+              letterSpacing: '-0.025em',
               color: 'var(--text-main)',
             }}
           >
             {pollData.question}
           </h1>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginTop: '0.25rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginTop: '0.25rem', flexWrap: 'wrap' }}>
             <div
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '0.4rem',
-                color: 'var(--text-muted)',
-                fontSize: '0.95rem',
+                gap: '0.5rem',
+                background: 'rgba(255, 255, 255, 0.05)',
+                padding: '0.35rem 0.85rem',
+                borderRadius: 'var(--radius-full)',
+                border: '1px solid var(--border-subtle)',
               }}
             >
-              <Users size={18} color="var(--primary)" />
-              <strong style={{ color: 'var(--text-main)', fontSize: '1.1rem' }}>
+              <Users size={17} color="var(--primary)" />
+              <strong style={{ color: 'var(--text-main)', fontSize: '1.08rem' }}>
                 {pollData.total_votes}
               </strong>{' '}
-              {pollData.total_votes === 1 ? 'total vote' : 'total votes'}
+              <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+                {pollData.total_votes === 1 ? 'total vote' : 'total votes cast'}
+              </span>
             </div>
 
-            <span style={{ color: 'var(--text-dim)' }}>•</span>
-
-            <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-              Real-time WebSocket feed driven by Redis Pub/Sub
+            <span style={{ color: 'var(--text-dim)', fontSize: '0.88rem' }}>
+              ⚡ Redis Pub/Sub live pipeline
             </span>
           </div>
         </div>
 
-        {/* Live Animated Chart */}
+        {/* Live Animated Bar Chart */}
         <LiveResultsChart
           options={pollData.options}
           totalVotes={pollData.total_votes}
         />
 
-        {/* Action Toolbar */}
+        {/* Bottom Toolbar & Share Banner */}
         <div
           style={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            paddingTop: '1.5rem',
+            paddingTop: '1.75rem',
             borderTop: '1px solid var(--border-subtle)',
             flexWrap: 'wrap',
-            gap: '1rem',
+            gap: '1.25rem',
           }}
         >
-          {/* Share Link Banner */}
+          {/* Share Link Field with Instant Copy */}
           <div
             style={{
               display: 'flex',
               alignItems: 'center',
               background: 'var(--bg-input)',
-              border: '1px solid var(--border-hover)',
+              border: '1px solid var(--border-card)',
               borderRadius: 'var(--radius-md)',
-              padding: '0.4rem 0.5rem 0.4rem 1rem',
-              gap: '0.75rem',
-              maxWidth: '450px',
+              padding: '0.45rem 0.55rem 0.45rem 1.15rem',
+              gap: '0.85rem',
+              maxWidth: '480px',
               flex: 1,
             }}
           >
             <span
               style={{
-                fontSize: '0.85rem',
+                fontSize: '0.88rem',
                 color: 'var(--text-muted)',
                 fontFamily: 'monospace',
                 overflow: 'hidden',
@@ -276,25 +295,26 @@ export const ResultsPage = () => {
             >
               {shareUrl}
             </span>
+
             <button
               onClick={copyShareLink}
               className="btn btn-primary btn-sm"
-              style={{ flexShrink: 0 }}
+              style={{ flexShrink: 0, padding: '0.45rem 1rem' }}
             >
               {copied ? <Check size={14} /> : <Copy size={14} />}
-              {copied ? 'Copied' : 'Copy'}
+              {copied ? 'Copied!' : 'Copy'}
             </button>
           </div>
 
-          <div style={{ display: 'flex', gap: '0.5rem' }}>
+          <div style={{ display: 'flex', gap: '0.65rem' }}>
             <Link
               to={`/poll/${pollData.share_code}`}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-secondary btn-sm"
-              title="Open public voting screen in a new tab"
+              title="Open public voting screen in a new window"
             >
-              <Vote size={15} /> Cast a Vote
+              <Vote size={15} /> Cast Vote
             </Link>
 
             {user && !isClosed && (
@@ -304,7 +324,7 @@ export const ResultsPage = () => {
                 className="btn btn-secondary btn-sm"
                 style={{ color: 'var(--accent-amber)' }}
               >
-                <Lock size={15} /> Close Poll
+                <Lock size={14} /> Close Poll
               </button>
             )}
           </div>
