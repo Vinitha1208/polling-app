@@ -54,7 +54,7 @@ export const LoginPage = () => {
           width: '320px',
           height: '320px',
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(37, 99, 235, 0.12) 0%, transparent 70%)',
           filter: 'blur(50px)',
           zIndex: 0,
           pointerEvents: 'none',
@@ -72,7 +72,7 @@ export const LoginPage = () => {
           gap: '1.75rem',
           position: 'relative',
           zIndex: 1,
-          background: 'rgba(13, 19, 38, 0.82)',
+          background: '#ffffff',
         }}
       >
         <div style={{ textAlign: 'center' }}>
@@ -81,12 +81,12 @@ export const LoginPage = () => {
               width: '54px',
               height: '54px',
               borderRadius: '16px',
-              background: 'linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%)',
+              background: 'linear-gradient(135deg, #2563eb 0%, #0284c7 50%, #0d9488 100%)',
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
               marginBottom: '1rem',
-              boxShadow: '0 8px 25px rgba(99, 102, 241, 0.45)',
+              boxShadow: '0 8px 25px rgba(37, 99, 235, 0.25)',
             }}
           >
             <LogIn size={26} color="#fff" />
@@ -112,11 +112,11 @@ export const LoginPage = () => {
         {error && (
           <div
             style={{
-              background: 'rgba(244, 63, 94, 0.14)',
-              border: '1px solid rgba(244, 63, 94, 0.35)',
+              background: '#fff1f2',
+              border: '1px solid #fecdd3',
               borderRadius: 'var(--radius-sm)',
               padding: '0.85rem 1rem',
-              color: '#fda4af',
+              color: '#e11d48',
               fontSize: '0.9rem',
               display: 'flex',
               alignItems: 'center',
@@ -185,11 +185,11 @@ export const LoginPage = () => {
             type="button"
             onClick={handleDemoFill}
             style={{
-              background: 'rgba(99, 102, 241, 0.1)',
-              border: '1px solid rgba(99, 102, 241, 0.25)',
+              background: '#eff6ff',
+              border: '1px solid #bfdbfe',
               borderRadius: 'var(--radius-sm)',
               padding: '0.6rem 1rem',
-              color: '#c7d2fe',
+              color: '#1d4ed8',
               fontSize: '0.88rem',
               fontWeight: 600,
               cursor: 'pointer',
@@ -200,12 +200,12 @@ export const LoginPage = () => {
               transition: 'all 0.2s ease',
             }}
           >
-            <Sparkles size={15} color="#818cf8" /> Click to Auto-fill Demo Credentials
+            <Sparkles size={15} color="#2563eb" /> Click to Auto-fill Demo Credentials
           </button>
 
           <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem' }}>
             Don't have an account?{' '}
-            <Link to="/signup" style={{ color: '#818cf8', fontWeight: 700 }}>
+            <Link to="/signup" style={{ color: '#2563eb', fontWeight: 700 }}>
               Sign Up
             </Link>
           </p>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { BarChart3, PlusCircle, LogOut, User, Zap, Sparkles } from 'lucide-react';
+import { BarChart3, PlusCircle, LogOut, User, Sparkles } from 'lucide-react';
 
 export const Navbar = () => {
   const { user, logout } = useAuth();
@@ -15,13 +15,14 @@ export const Navbar = () => {
   return (
     <header
       style={{
-        borderBottom: '1px solid var(--border-subtle)',
-        background: 'rgba(5, 8, 20, 0.78)',
-        backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
+        borderBottom: '1px solid #e2e8f0',
+        background: 'rgba(255, 255, 255, 0.92)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
         position: 'sticky',
         top: 0,
         zIndex: 50,
+        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.02)',
       }}
     >
       <div
@@ -34,7 +35,7 @@ export const Navbar = () => {
           justifyContent: 'space-between',
         }}
       >
-        {/* Brand Logo with Shimmering Glow */}
+        {/* Brand Logo with Ocean Teal Gradient */}
         <Link
           to={user ? '/dashboard' : '/login'}
           style={{
@@ -49,12 +50,11 @@ export const Navbar = () => {
               width: '40px',
               height: '40px',
               borderRadius: '12px',
-              background: 'linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%)',
+              background: 'linear-gradient(135deg, #2563eb 0%, #0284c7 50%, #0d9488 100%)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              boxShadow: '0 0 20px rgba(99, 102, 241, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.4)',
-              position: 'relative',
+              boxShadow: '0 4px 14px rgba(37, 99, 235, 0.3)',
             }}
           >
             <BarChart3 size={22} color="#ffffff" />
@@ -67,12 +67,10 @@ export const Navbar = () => {
                 fontWeight: 800,
                 fontSize: '1.35rem',
                 letterSpacing: '-0.03em',
-                background: 'linear-gradient(135deg, #ffffff 40%, #c7d2fe 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
+                color: '#0f172a',
               }}
             >
-              PollPulse
+              Poll<span style={{ color: '#2563eb' }}>Pulse</span>
             </span>
 
             <span
@@ -99,9 +97,6 @@ export const Navbar = () => {
               <Link
                 to="/create-poll"
                 className="btn btn-primary btn-sm"
-                style={{
-                  boxShadow: '0 4px 18px rgba(99, 102, 241, 0.45)',
-                }}
               >
                 <PlusCircle size={15} />
                 Create Poll
@@ -113,7 +108,7 @@ export const Navbar = () => {
                   alignItems: 'center',
                   gap: '0.75rem',
                   paddingLeft: '0.6rem',
-                  borderLeft: '1px solid var(--border-subtle)',
+                  borderLeft: '1px solid #e2e8f0',
                 }}
               >
                 <div
@@ -123,10 +118,10 @@ export const Navbar = () => {
                     gap: '0.55rem',
                     fontSize: '0.88rem',
                     color: 'var(--text-muted)',
-                    background: 'rgba(255, 255, 255, 0.04)',
+                    background: '#f1f5f9',
                     padding: '0.35rem 0.75rem',
                     borderRadius: 'var(--radius-full)',
-                    border: '1px solid var(--border-subtle)',
+                    border: '1px solid #e2e8f0',
                   }}
                 >
                   <div
@@ -134,7 +129,7 @@ export const Navbar = () => {
                       width: '24px',
                       height: '24px',
                       borderRadius: '50%',
-                      background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
+                      background: 'linear-gradient(135deg, #2563eb, #0284c7)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',

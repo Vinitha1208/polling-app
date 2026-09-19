@@ -131,7 +131,7 @@ export const CreatePollPage = () => {
             onClick={() => handlePresetFill('team')}
             className="btn btn-secondary btn-sm"
           >
-            <Sparkles size={14} color="#34d399" /> Meeting Scheduling
+            <Sparkles size={14} color="#059669" /> Meeting Scheduling
           </button>
         </div>
       </div>
@@ -141,17 +141,17 @@ export const CreatePollPage = () => {
         className="glass-card"
         style={{
           padding: '2.5rem 2.25rem',
-          background: 'rgba(13, 19, 38, 0.78)',
+          background: '#ffffff',
         }}
       >
         {error && (
           <div
             style={{
-              background: 'rgba(244, 63, 94, 0.15)',
-              border: '1px solid rgba(244, 63, 94, 0.35)',
+              background: '#fff1f2',
+              border: '1px solid #fecdd3',
               borderRadius: 'var(--radius-sm)',
               padding: '0.85rem 1.15rem',
-              color: '#fda4af',
+              color: '#e11d48',
               fontSize: '0.92rem',
               display: 'flex',
               alignItems: 'center',
@@ -200,9 +200,9 @@ export const CreatePollPage = () => {
                     width: '32px',
                     height: '32px',
                     borderRadius: '8px',
-                    background: 'rgba(99, 102, 241, 0.14)',
-                    color: '#a5b4fc',
-                    border: '1px solid rgba(99, 102, 241, 0.25)',
+                    background: '#eff6ff',
+                    color: '#2563eb',
+                    border: '1px solid #bfdbfe',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -229,7 +229,7 @@ export const CreatePollPage = () => {
                     onClick={() => handleRemoveOption(index)}
                     className="btn btn-secondary btn-sm"
                     title="Remove choice"
-                    style={{ padding: '0.8rem', color: '#f87171' }}
+                    style={{ padding: '0.8rem', color: '#e11d48' }}
                   >
                     <Trash2 size={16} />
                   </button>
@@ -246,8 +246,8 @@ export const CreatePollPage = () => {
                   alignSelf: 'flex-start',
                   marginTop: '0.5rem',
                   borderStyle: 'dashed',
-                  borderColor: 'rgba(99, 102, 241, 0.4)',
-                  color: '#a5b4fc',
+                  borderColor: '#bfdbfe',
+                  color: '#2563eb',
                 }}
               >
                 <Plus size={16} /> Add Choice
@@ -302,8 +302,9 @@ export const CreatePollPage = () => {
               display: 'flex',
               flexDirection: 'column',
               gap: '1.6rem',
-              boxShadow: '0 25px 60px rgba(0,0,0,0.85)',
-              border: '1px solid rgba(99, 102, 241, 0.5)',
+              background: '#ffffff',
+              boxShadow: '0 20px 45px -10px rgba(15, 23, 42, 0.18)',
+              border: '1px solid #e2e8f0',
             }}
           >
             <div
@@ -311,14 +312,14 @@ export const CreatePollPage = () => {
                 width: '64px',
                 height: '64px',
                 borderRadius: '20px',
-                background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(6, 182, 212, 0.2) 100%)',
-                color: '#34d399',
+                background: '#ecfdf5',
+                color: '#059669',
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 margin: '0 auto',
-                border: '1px solid rgba(16, 185, 129, 0.4)',
-                boxShadow: '0 0 25px rgba(16, 185, 129, 0.3)',
+                border: '1px solid #a7f3d0',
+                boxShadow: '0 4px 16px rgba(5, 150, 105, 0.15)',
               }}
             >
               <Share2 size={32} />

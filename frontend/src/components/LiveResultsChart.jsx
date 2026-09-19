@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trophy, CheckCircle2, Sparkles, TrendingUp } from 'lucide-react';
+import { Trophy, CheckCircle2, TrendingUp } from 'lucide-react';
 
 export const LiveResultsChart = ({ options = [], totalVotes = 0, selectedOptionId = null }) => {
   const highestVotes = Math.max(...options.map((o) => o.votes || 0), 0);
@@ -7,7 +7,7 @@ export const LiveResultsChart = ({ options = [], totalVotes = 0, selectedOptionI
   const optionLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.15rem', width: '100%' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
       {options.map((opt, index) => {
         const isLeading = hasVotes && opt.votes === highestVotes && highestVotes > 0;
         const isSelectedByUser = selectedOptionId === opt.id;
@@ -19,9 +19,9 @@ export const LiveResultsChart = ({ options = [], totalVotes = 0, selectedOptionI
             key={opt.id}
             className={`vote-bar-container ${isLeading ? 'leading' : ''}`}
             style={{
-              borderColor: isSelectedByUser ? 'var(--primary)' : undefined,
+              borderColor: isSelectedByUser ? '#2563eb' : undefined,
               boxShadow: isSelectedByUser
-                ? '0 0 25px rgba(99, 102, 241, 0.25), inset 0 0 1px 1px rgba(99, 102, 241, 0.5)'
+                ? '0 4px 16px rgba(37, 99, 235, 0.15)'
                 : undefined,
             }}
           >
@@ -40,21 +40,21 @@ export const LiveResultsChart = ({ options = [], totalVotes = 0, selectedOptionI
                     height: '30px',
                     borderRadius: '8px',
                     background: isLeading
-                      ? 'rgba(16, 185, 129, 0.2)'
+                      ? '#ecfdf5'
                       : isSelectedByUser
-                      ? 'rgba(99, 102, 241, 0.25)'
-                      : 'rgba(255, 255, 255, 0.07)',
+                      ? '#eff6ff'
+                      : '#f1f5f9',
                     border: isLeading
-                      ? '1px solid rgba(16, 185, 129, 0.5)'
+                      ? '1px solid #a7f3d0'
                       : isSelectedByUser
-                      ? '1px solid var(--primary)'
-                      : '1px solid var(--border-subtle)',
+                      ? '1px solid #93c5fd'
+                      : '1px solid #e2e8f0',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     fontWeight: 700,
                     fontSize: '0.82rem',
-                    color: isLeading ? '#34d399' : isSelectedByUser ? '#a5b4fc' : 'var(--text-muted)',
+                    color: isLeading ? '#059669' : isSelectedByUser ? '#2563eb' : '#64748b',
                     flexShrink: 0,
                   }}
                 >
@@ -65,7 +65,7 @@ export const LiveResultsChart = ({ options = [], totalVotes = 0, selectedOptionI
                   style={{
                     fontSize: '1.05rem',
                     fontWeight: isLeading ? 700 : 600,
-                    color: 'var(--text-main)',
+                    color: '#0f172a',
                   }}
                 >
                   {opt.text}
@@ -75,9 +75,9 @@ export const LiveResultsChart = ({ options = [], totalVotes = 0, selectedOptionI
                   <span
                     className="pill-badge"
                     style={{
-                      background: 'rgba(99, 102, 241, 0.2)',
-                      color: '#a5b4fc',
-                      border: '1px solid rgba(99, 102, 241, 0.45)',
+                      background: '#eff6ff',
+                      color: '#2563eb',
+                      border: '1px solid #bfdbfe',
                       padding: '0.2rem 0.65rem',
                     }}
                   >
@@ -89,14 +89,13 @@ export const LiveResultsChart = ({ options = [], totalVotes = 0, selectedOptionI
                   <span
                     className="pill-badge"
                     style={{
-                      background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(6, 182, 212, 0.2) 100%)',
-                      color: '#34d399',
-                      border: '1px solid rgba(16, 185, 129, 0.5)',
+                      background: '#ecfdf5',
+                      color: '#059669',
+                      border: '1px solid #a7f3d0',
                       padding: '0.2rem 0.65rem',
-                      boxShadow: '0 0 12px rgba(16, 185, 129, 0.25)',
                     }}
                   >
-                    <Trophy size={13} color="#34d399" /> Leader
+                    <Trophy size={13} color="#059669" /> Leader
                   </span>
                 )}
               </div>
@@ -105,7 +104,7 @@ export const LiveResultsChart = ({ options = [], totalVotes = 0, selectedOptionI
                 <span
                   style={{
                     fontSize: '0.88rem',
-                    color: 'var(--text-muted)',
+                    color: '#64748b',
                     fontWeight: 500,
                   }}
                 >
@@ -117,10 +116,9 @@ export const LiveResultsChart = ({ options = [], totalVotes = 0, selectedOptionI
                     fontFamily: 'var(--font-display)',
                     fontWeight: 800,
                     fontSize: '1.25rem',
-                    color: isLeading ? '#34d399' : '#f8fafc',
+                    color: isLeading ? '#059669' : '#0f172a',
                     minWidth: '56px',
                     textAlign: 'right',
-                    textShadow: isLeading ? '0 0 15px rgba(16, 185, 129, 0.5)' : undefined,
                   }}
                 >
                   {percentage}%
@@ -136,11 +134,11 @@ export const LiveResultsChart = ({ options = [], totalVotes = 0, selectedOptionI
           style={{
             textAlign: 'center',
             padding: '2.5rem 1.5rem',
-            color: 'var(--text-muted)',
+            color: '#64748b',
             fontSize: '0.95rem',
-            background: 'rgba(255, 255, 255, 0.02)',
+            background: '#f8fafc',
             borderRadius: 'var(--radius-md)',
-            border: '1px dashed var(--border-card)',
+            border: '1px dashed #cbd5e1',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -152,18 +150,18 @@ export const LiveResultsChart = ({ options = [], totalVotes = 0, selectedOptionI
               width: '44px',
               height: '44px',
               borderRadius: '12px',
-              background: 'rgba(99, 102, 241, 0.1)',
+              background: '#eff6ff',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: 'var(--primary)',
+              color: '#2563eb',
             }}
           >
             <TrendingUp size={22} />
           </div>
           <div>
-            <p style={{ fontWeight: 600, color: 'var(--text-main)' }}>Awaiting Live Audience Votes</p>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-dim)', marginTop: '0.2rem' }}>
+            <p style={{ fontWeight: 600, color: '#0f172a' }}>Awaiting Live Audience Votes</p>
+            <p style={{ fontSize: '0.85rem', color: '#64748b', marginTop: '0.2rem' }}>
               Share your poll link. Watch results and animated bars update instantaneously when votes arrive!
             </p>
           </div>

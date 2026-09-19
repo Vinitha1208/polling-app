@@ -35,9 +35,9 @@ export const ToastContainer = () => {
     <div className="toast-container">
       {toasts.map((toast) => (
         <div key={toast.id} className="toast">
-          {toast.type === 'success' && <CheckCircle2 size={18} color="#34d399" />}
-          {toast.type === 'error' && <AlertCircle size={18} color="#f87171" />}
-          {toast.type === 'info' && <Info size={18} color="#60a5fa" />}
+          {toast.type === 'success' && <CheckCircle2 size={18} color="#059669" />}
+          {toast.type === 'error' && <AlertCircle size={18} color="#e11d48" />}
+          {toast.type === 'info' && <Info size={18} color="#2563eb" />}
           <span style={{ flex: 1 }}>{toast.message}</span>
           <button
             onClick={() => removeToast(toast.id)}

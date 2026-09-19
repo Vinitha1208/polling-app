@@ -59,12 +59,12 @@ export const VotePage = () => {
       storedVotes[poll.id] = selectedOption;
       localStorage.setItem('user_voted_polls', JSON.stringify(storedVotes));
 
-      // Fire vibrant multi-color confetti!
+      // Fire vibrant multi-color confetti without violet!
       confetti({
         particleCount: 100,
         spread: 80,
         origin: { y: 0.65 },
-        colors: ['#6366f1', '#a855f7', '#10b981', '#06b6d4', '#ec4899'],
+        colors: ['#2563eb', '#0284c7', '#059669', '#10b981', '#f59e0b', '#06b6d4'],
       });
 
       showToast('Vote cast successfully!');
@@ -117,12 +117,12 @@ export const VotePage = () => {
               width: '64px',
               height: '64px',
               borderRadius: '20px',
-              background: 'rgba(244, 63, 94, 0.15)',
-              border: '1px solid rgba(244, 63, 94, 0.35)',
+              background: '#fff1f2',
+              border: '1px solid #fecdd3',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: '#fda4af',
+              color: '#e11d48',
               margin: '0 auto 1.25rem',
             }}
           >
@@ -154,7 +154,7 @@ export const VotePage = () => {
           display: 'flex',
           flexDirection: 'column',
           gap: '2rem',
-          background: 'rgba(13, 19, 38, 0.78)',
+          background: '#ffffff',
         }}
       >
         {/* Header Badges */}
@@ -173,11 +173,11 @@ export const VotePage = () => {
             <span
               style={{
                 fontSize: '0.82rem',
-                color: '#c7d2fe',
+                color: '#1d4ed8',
                 fontFamily: 'var(--font-display)',
                 fontWeight: 700,
-                background: 'rgba(99, 102, 241, 0.12)',
-                border: '1px solid rgba(99, 102, 241, 0.3)',
+                background: '#eff6ff',
+                border: '1px solid #bfdbfe',
                 padding: '0.25rem 0.65rem',
                 borderRadius: '8px',
                 letterSpacing: '0.05em',
@@ -237,8 +237,9 @@ export const VotePage = () => {
                       width: '28px',
                       height: '28px',
                       borderRadius: '8px',
-                      background: isSelected ? 'var(--primary)' : 'rgba(255, 255, 255, 0.08)',
-                      color: isSelected ? '#ffffff' : 'var(--text-muted)',
+                      background: isSelected ? 'var(--primary)' : '#f1f5f9',
+                      color: isSelected ? '#ffffff' : '#64748b',
+                      border: isSelected ? 'none' : '1px solid #e2e8f0',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -299,15 +300,15 @@ export const VotePage = () => {
             <div
               style={{
                 background: hasVoted
-                  ? 'linear-gradient(135deg, rgba(16, 185, 129, 0.14) 0%, rgba(6, 182, 212, 0.12) 100%)'
-                  : 'rgba(255, 255, 255, 0.04)',
-                border: `1px solid ${hasVoted ? 'rgba(16, 185, 129, 0.4)' : 'var(--border-subtle)'}`,
+                  ? '#f0fdf4'
+                  : '#f8fafc',
+                border: `1px solid ${hasVoted ? '#a7f3d0' : 'var(--border-subtle)'}`,
                 borderRadius: 'var(--radius-md)',
                 padding: '1.2rem 1.5rem',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '1rem',
-                boxShadow: hasVoted ? '0 0 25px rgba(16, 185, 129, 0.15)' : 'none',
+                boxShadow: hasVoted ? '0 4px 16px rgba(5, 150, 105, 0.1)' : 'none',
               }}
             >
               <div
@@ -315,14 +316,15 @@ export const VotePage = () => {
                   width: '42px',
                   height: '42px',
                   borderRadius: '50%',
-                  background: hasVoted ? 'rgba(16, 185, 129, 0.2)' : 'rgba(255, 255, 255, 0.08)',
+                  background: hasVoted ? '#ecfdf5' : '#f1f5f9',
+                  border: hasVoted ? '1px solid #a7f3d0' : '1px solid #e2e8f0',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   flexShrink: 0,
                 }}
               >
-                <CheckCircle2 size={24} color={hasVoted ? '#34d399' : 'var(--text-muted)'} />
+                <CheckCircle2 size={24} color={hasVoted ? '#059669' : 'var(--text-muted)'} />
               </div>
               <div>
                 <p style={{ fontWeight: 700, color: 'var(--text-main)', fontSize: '1.05rem' }}>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Copy, Check, ExternalLink, BarChart2, Lock, Trash2, Users, Radio, Sparkles } from 'lucide-react';
+import { Copy, Check, BarChart2, Lock, Trash2, Users } from 'lucide-react';
 import { showToast } from './Toast';
 import { api } from '../services/api';
 
@@ -57,7 +57,7 @@ export const PollCard = ({ poll, onStatusChange, onDelete }) => {
         display: 'flex',
         flexDirection: 'column',
         gap: '1.25rem',
-        background: 'rgba(13, 19, 38, 0.75)',
+        background: '#ffffff',
       }}
     >
       {/* Top Meta Bar */}
@@ -79,11 +79,11 @@ export const PollCard = ({ poll, onStatusChange, onDelete }) => {
               fontWeight: 700,
               fontSize: '0.82rem',
               letterSpacing: '0.08em',
-              background: 'rgba(99, 102, 241, 0.12)',
-              color: '#c7d2fe',
+              background: '#eff6ff',
+              color: '#1d4ed8',
               padding: '0.22rem 0.65rem',
               borderRadius: '8px',
-              border: '1px solid rgba(99, 102, 241, 0.25)',
+              border: '1px solid #bfdbfe',
             }}
           >
             #{poll.share_code}
@@ -95,16 +95,16 @@ export const PollCard = ({ poll, onStatusChange, onDelete }) => {
             display: 'flex',
             alignItems: 'center',
             gap: '0.45rem',
-            color: 'var(--text-muted)',
+            color: '#64748b',
             fontSize: '0.9rem',
-            background: 'rgba(255, 255, 255, 0.04)',
+            background: '#f8fafc',
             padding: '0.25rem 0.7rem',
             borderRadius: 'var(--radius-full)',
-            border: '1px solid var(--border-subtle)',
+            border: '1px solid #e2e8f0',
           }}
         >
-          <Users size={15} color="var(--primary)" />
-          <strong style={{ color: 'var(--text-main)', fontSize: '0.95rem' }}>{poll.total_votes}</strong>{' '}
+          <Users size={15} color="#2563eb" />
+          <strong style={{ color: '#0f172a', fontSize: '0.95rem' }}>{poll.total_votes}</strong>{' '}
           {poll.total_votes === 1 ? 'vote' : 'votes'}
         </div>
       </div>
@@ -116,7 +116,7 @@ export const PollCard = ({ poll, onStatusChange, onDelete }) => {
           fontWeight: 700,
           fontFamily: 'var(--font-display)',
           lineHeight: 1.45,
-          color: 'var(--text-main)',
+          color: '#0f172a',
         }}
       >
         {poll.question}
@@ -129,14 +129,14 @@ export const PollCard = ({ poll, onStatusChange, onDelete }) => {
             <div
               style={{
                 fontSize: '0.85rem',
-                color: 'var(--text-muted)',
+                color: '#64748b',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
               }}
             >
-              <span style={{ color: 'var(--text-main)' }}>{opt.text}</span>
-              <span style={{ fontWeight: 600, color: 'var(--text-muted)' }}>
+              <span style={{ color: '#0f172a' }}>{opt.text}</span>
+              <span style={{ fontWeight: 600, color: '#64748b' }}>
                 {opt.votes} ({Math.round(opt.percentage || 0)}%)
               </span>
             </div>
@@ -144,7 +144,7 @@ export const PollCard = ({ poll, onStatusChange, onDelete }) => {
               style={{
                 width: '100%',
                 height: '4px',
-                background: 'rgba(255, 255, 255, 0.06)',
+                background: '#f1f5f9',
                 borderRadius: '999px',
                 overflow: 'hidden',
               }}
@@ -153,7 +153,7 @@ export const PollCard = ({ poll, onStatusChange, onDelete }) => {
                 style={{
                   width: `${opt.percentage || 0}%`,
                   height: '100%',
-                  background: 'linear-gradient(90deg, #6366f1, #a855f7)',
+                  background: 'linear-gradient(90deg, #2563eb, #0284c7)',
                   borderRadius: '999px',
                   transition: 'width 0.4s ease',
                 }}
@@ -162,7 +162,7 @@ export const PollCard = ({ poll, onStatusChange, onDelete }) => {
           </div>
         ))}
         {poll.options && poll.options.length > 3 && (
-          <span style={{ fontSize: '0.8rem', color: 'var(--text-dim)', marginTop: '0.2rem' }}>
+          <span style={{ fontSize: '0.8rem', color: '#94a3b8', marginTop: '0.2rem' }}>
             +{poll.options.length - 3} additional voting choices
           </span>
         )}
@@ -175,7 +175,7 @@ export const PollCard = ({ poll, onStatusChange, onDelete }) => {
           alignItems: 'center',
           justifyContent: 'space-between',
           paddingTop: '1.2rem',
-          borderTop: '1px solid var(--border-subtle)',
+          borderTop: '1px solid #e2e8f0',
           flexWrap: 'wrap',
           gap: '0.75rem',
           marginTop: 'auto',
@@ -187,7 +187,7 @@ export const PollCard = ({ poll, onStatusChange, onDelete }) => {
             className="btn btn-secondary btn-sm"
             title="Copy audience share link"
           >
-            {copied ? <Check size={14} color="#34d399" /> : <Copy size={14} />}
+            {copied ? <Check size={14} color="#059669" /> : <Copy size={14} />}
             {copied ? 'Copied' : 'Share Link'}
           </button>
 
@@ -204,7 +204,7 @@ export const PollCard = ({ poll, onStatusChange, onDelete }) => {
               disabled={closing}
               className="btn btn-secondary btn-sm"
               title="Close Poll to new votes"
-              style={{ color: 'var(--accent-amber)', padding: '0.45rem 0.75rem' }}
+              style={{ color: '#d97706', padding: '0.45rem 0.75rem' }}
             >
               <Lock size={14} />
               Close

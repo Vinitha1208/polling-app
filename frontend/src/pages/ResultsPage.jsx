@@ -111,10 +111,11 @@ export const ResultsPage = () => {
             color: 'var(--text-muted)',
             fontSize: '0.92rem',
             fontWeight: 600,
-            background: 'rgba(255, 255, 255, 0.04)',
+            background: '#ffffff',
             padding: '0.45rem 0.95rem',
             borderRadius: 'var(--radius-sm)',
-            border: '1px solid var(--border-subtle)',
+            border: '1px solid #e2e8f0',
+            boxShadow: '0 1px 2px rgba(0, 0, 0, 0.03)',
           }}
         >
           <ArrowLeft size={16} /> Dashboard
@@ -126,11 +127,11 @@ export const ResultsPage = () => {
             <span
               className="pill-badge"
               style={{
-                background: 'rgba(16, 185, 129, 0.16)',
-                color: '#34d399',
-                border: '1px solid rgba(16, 185, 129, 0.4)',
+                background: '#ecfdf5',
+                color: '#059669',
+                border: '1px solid #a7f3d0',
                 padding: '0.35rem 0.95rem',
-                boxShadow: '0 0 20px rgba(16, 185, 129, 0.25)',
+                boxShadow: '0 2px 10px rgba(5, 150, 105, 0.15)',
               }}
             >
               <span className="pulse-dot" /> LIVE SYNC ACTIVE
@@ -139,9 +140,9 @@ export const ResultsPage = () => {
             <span
               className="pill-badge"
               style={{
-                background: 'rgba(245, 158, 11, 0.16)',
-                color: '#fbbf24',
-                border: '1px solid rgba(245, 158, 11, 0.4)',
+                background: '#fffbeb',
+                color: '#d97706',
+                border: '1px solid #fde68a',
                 padding: '0.35rem 0.95rem',
               }}
             >
@@ -151,9 +152,9 @@ export const ResultsPage = () => {
             <span
               className="pill-badge"
               style={{
-                background: 'rgba(244, 63, 94, 0.16)',
-                color: '#f87171',
-                border: '1px solid rgba(244, 63, 94, 0.4)',
+                background: '#fff1f2',
+                color: '#e11d48',
+                border: '1px solid #fecdd3',
                 padding: '0.35rem 0.95rem',
               }}
             >
@@ -181,7 +182,7 @@ export const ResultsPage = () => {
           display: 'flex',
           flexDirection: 'column',
           gap: '2.25rem',
-          background: 'rgba(13, 19, 38, 0.82)',
+          background: '#ffffff',
         }}
       >
         {/* Header Question and Metrics */}
@@ -193,11 +194,11 @@ export const ResultsPage = () => {
                 fontWeight: 800,
                 fontSize: '0.85rem',
                 letterSpacing: '0.08em',
-                background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.2))',
-                color: '#c7d2fe',
+                background: '#eff6ff',
+                color: '#1d4ed8',
                 padding: '0.25rem 0.75rem',
                 borderRadius: '8px',
-                border: '1px solid rgba(99, 102, 241, 0.35)',
+                border: '1px solid #bfdbfe',
               }}
             >
               SHARE CODE: #{pollData.share_code}
@@ -229,10 +230,10 @@ export const ResultsPage = () => {
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '0.5rem',
-                background: 'rgba(255, 255, 255, 0.05)',
+                background: '#f8fafc',
                 padding: '0.35rem 0.85rem',
                 borderRadius: 'var(--radius-full)',
-                border: '1px solid var(--border-subtle)',
+                border: '1px solid #e2e8f0',
               }}
             >
               <Users size={17} color="var(--primary)" />

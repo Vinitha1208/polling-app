@@ -49,7 +49,7 @@ export const SignupPage = () => {
           width: '320px',
           height: '320px',
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(168, 85, 247, 0.22) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(5, 150, 105, 0.12) 0%, transparent 70%)',
           filter: 'blur(50px)',
           zIndex: 0,
           pointerEvents: 'none',
@@ -67,7 +67,7 @@ export const SignupPage = () => {
           gap: '1.75rem',
           position: 'relative',
           zIndex: 1,
-          background: 'rgba(13, 19, 38, 0.82)',
+          background: '#ffffff',
         }}
       >
         <div style={{ textAlign: 'center' }}>
@@ -76,12 +76,12 @@ export const SignupPage = () => {
               width: '54px',
               height: '54px',
               borderRadius: '16px',
-              background: 'linear-gradient(135deg, #10b981 0%, #06b6d4 50%, #6366f1 100%)',
+              background: 'linear-gradient(135deg, #059669 0%, #0284c7 50%, #2563eb 100%)',
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
               marginBottom: '1rem',
-              boxShadow: '0 8px 25px rgba(16, 185, 129, 0.4)',
+              boxShadow: '0 8px 25px rgba(5, 150, 105, 0.25)',
             }}
           >
             <UserPlus size={26} color="#fff" />
@@ -107,11 +107,11 @@ export const SignupPage = () => {
         {error && (
           <div
             style={{
-              background: 'rgba(244, 63, 94, 0.14)',
-              border: '1px solid rgba(244, 63, 94, 0.35)',
+              background: '#fff1f2',
+              border: '1px solid #fecdd3',
               borderRadius: 'var(--radius-sm)',
               padding: '0.85rem 1rem',
-              color: '#fda4af',
+              color: '#e11d48',
               fontSize: '0.9rem',
               display: 'flex',
               alignItems: 'center',
@@ -198,7 +198,7 @@ export const SignupPage = () => {
 
         <p style={{ textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.92rem' }}>
           Already registered?{' '}
-          <Link to="/login" style={{ color: '#818cf8', fontWeight: 700 }}>
+          <Link to="/login" style={{ color: '#2563eb', fontWeight: 700 }}>
             Sign In
           </Link>
         </p>
