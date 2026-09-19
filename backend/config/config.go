@@ -4,6 +4,7 @@ import (
 	"context"
 	"log"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/joho/godotenv"
@@ -93,17 +94,28 @@ func InitRedis(cfg *Config) *redis.Client {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	rdb := redis.NewClient(&redis.Options{
-		Addr:     cfg.RedisURL,
-		Password: "", // no password by default
-		DB:       0,  // default DB
-	})
+	var opt *redis.Options
+	if strings.HasPrefix(cfg.RedisURL, "redis://") || strings.HasPrefix(cfg.RedisURL, "rediss://") {
+		parsedOpt, err := redis.ParseURL(cfg.RedisURL)
+		if err != nil {
+			log.Fatalf("Invalid Redis URL format: %v", err)
+		}
+		opt = parsedOpt
+	} else {
+		opt = &redis.Options{
+			Addr:     cfg.RedisURL,
+			Password: "",
+			DB:       0,
+		}
+	}
+
+	rdb := redis.NewClient(opt)
 
 	_, err := rdb.Ping(ctx).Result()
 	if err != nil {
 		log.Fatalf("Failed to connect to Redis at %s: %v", cfg.RedisURL, err)
 	}
 
-	log.Printf("Connected to Redis at %s", cfg.RedisURL)
+	log.Printf("Connected to Redis successfully (%s)", cfg.RedisURL)
 	return rdb
 }
